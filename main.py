@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from google import genai
 from google.genai import types
 import sys
+from functions.call_function import call_function
 
 def main():
 
@@ -120,11 +121,12 @@ All paths you provide should be relative to the working directory. You do not ne
     
     if response.function_calls is not None:
         for item in response.function_calls:
-            print(f"Calling function: {item.name}({item.args})")
+            function_call_result = call_function(item, verbose="true")
     else:
         print(response.text)
-
-
+    if function_call_result.parts[0].function_response.response is None:
+        raise Exception("Function call did not return a response.")
+    print(f"-> {function_call_result.parts[0].function_response.response}")
 
 
 main()

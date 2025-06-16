@@ -1,7 +1,7 @@
-from get_file_content import get_file_content
-from get_files_info import get_files_info
-from run_python_file import run_python_file
-from write_file import write_file
+from functions._get_file_content import get_file_content
+from functions._get_files_info import get_files_info
+from functions._run_python_file import run_python_file
+from functions._write_file import write_file
 from google import genai
 from google.genai import types
 
@@ -33,13 +33,13 @@ def call_function(function_call_part, verbose="false"):
             )
     
     if function_name == "get_file_content":
-        function_result = get_file_content("../ai_agent", function_args)
+        function_result = get_file_content("calculator", function_args.get("file"))
     if function_name == "get_files_info":
-        function_result = get_files_info('../ai_agent', function_args)
+        function_result = get_files_info('calculator', function_args.get("directory"))
     if function_name == "run_python_file":
-        function_result = run_python_file('../ai_agent', function_args)
+        function_result = run_python_file('calculator', function_args.get("file"))
     if function_name == "write_file":
-        function_result = write_file('../ai_agent', function_args)
+        function_result = write_file('calculator', function_args.get("file"), function_args.get("content"))
 
     return types.Content(
         role="tool",
