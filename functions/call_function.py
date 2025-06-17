@@ -9,7 +9,8 @@ from google.genai import types
 def call_function(function_call_part, verbose="false"):
     if verbose == "true":
         print(f"Calling function: {function_call_part.name}({function_call_part.args})")
-    print(f"Calling function: {function_call_part.name}")
+    else:
+        print(f"Calling function: {function_call_part.name}")
 
     function_dict = {
         "get_file_content": get_file_content,

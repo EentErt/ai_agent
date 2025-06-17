@@ -19,7 +19,8 @@ def run_python_file(working_directory, file_path):
         return "No output produced"
     output.stdout = f"STDOUT: {output.stdout}"
     output.stderr = f"STDERR: {output.stderr}"
+    output_string = f"{output.stdout}\n{output.stderr}"
     exit_code = output.returncode
     if exit_code != 0:
         return f"Process exited with code {exit_code}"
-    return output
+    return output_string
